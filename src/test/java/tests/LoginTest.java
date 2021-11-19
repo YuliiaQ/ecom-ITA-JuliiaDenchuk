@@ -1,14 +1,16 @@
 package tests;
 
-import lombok.extern.java.Log;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.assertj.core.api.Assertions;
 import pages.BasePage;
+import pages.HeaderComponent;
 import pages.LoginPage;
+import pages.RegistrationPage;
 
-public class LoginTest extends BasePage {
+public class LoginTest extends BaseTest {
     LoginPage loginPage;
+    HeaderComponent headerPage;
+    RegistrationPage registrationPage;
 
     private static final String loginErrorExpectedText = "Warning: No match for E-Mail Address and/or Password.";
     private static final String confirmationEmailExpectedMessage = "An email with a confirmation link has been sent your email address.";
@@ -16,7 +18,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithValidEmailValidPasswordField(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
@@ -27,7 +29,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithValidEmailEmptyPasswordField(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
@@ -40,7 +42,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithValidPasswordEmptyEmailField(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("");
@@ -53,7 +55,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithValidEmailInvalidPasswordField(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
@@ -65,7 +67,7 @@ public class LoginTest extends BasePage {
     }
     @Test
     void errorAlertValidationWhenEmailIsNotRegistered() {
-        loginPage= new LoginPage(driver);
+        loginPage= new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("test@gmail.com");
@@ -77,7 +79,7 @@ public class LoginTest extends BasePage {
     }
     @Test
     void loginWithValidEmailAndForgottenPasswordLink(){
-        loginPage= new LoginPage(driver);
+        loginPage= new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("sajowi9588@epeva.com");
@@ -91,7 +93,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithInvalidEmailAndForgottenPassword(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.inputEmailToEmailField("testtt@gmail.com");
@@ -105,7 +107,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void forgottenPasswordWithEmptyEmailAndPassword (){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.clickForgottenPasswordLink();
@@ -117,7 +119,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithInvalidEmailAndForgottenPasswordButton(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.clickForgottenPasswordButton();
@@ -130,7 +132,7 @@ public class LoginTest extends BasePage {
 
     @Test
     void loginWithValidEmailAndForgottenPasswordButton(){
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         loginPage.clickAccountDropdown();
         loginPage.clickLoginFromDropdown();
         loginPage.clickForgottenPasswordButton();
@@ -139,5 +141,81 @@ public class LoginTest extends BasePage {
         String confirmationEmailActualMessage = loginPage.getConfirmationLinkMessage();
         Assertions.assertThat(confirmationEmailActualMessage).as("error message is different")
                 .isEqualTo(confirmationEmailExpectedMessage);
+    }
+
+    @Test
+    void unsuccessfulRegistrationWithEmptyEmailField(){
+        headerPage = new HeaderComponent();
+        registrationPage = new RegistrationPage();
+        headerPage.clickAccountDropdown();
+        headerPage.clickRegisterFromDropdown();
+        registrationPage.inputDataToRegistrationField("firstname", "Test");
+        registrationPage.inputDataToRegistrationField("lastname", "Test");
+        registrationPage.inputDataToRegistrationField("telephone", "12345667");
+        registrationPage.inputDataToRegistrationField("password", "1234");
+        registrationPage.inputDataToRegistrationField("confirm", "1234");
+        registrationPage.clickNewsletterYesRadioButton();
+        registrationPage.clickPrivacyPolicyCheckbox();
+        registrationPage.clickContinueButton();
+        String getEmailDoesNotAppearActualMessage = registrationPage.getWarningInvalidEmailMessage();
+        Assertions.assertThat(getEmailDoesNotAppearActualMessage).as("error message is different")
+                .isEqualTo(getEmailDoesNotAppearActualMessage);
+    }
+
+    @Test
+    void successfulRegistrationWithAllFields(){
+        headerPage = new HeaderComponent();
+        registrationPage = new RegistrationPage();
+        headerPage.clickAccountDropdown();
+        headerPage.clickRegisterFromDropdown();
+        registrationPage.inputDataToRegistrationField("firstname", "Test");
+        registrationPage.inputDataToRegistrationField("lastname", "Test");
+        registrationPage.inputDataToRegistrationField("email", "sajowi9588@epeva.com");
+        registrationPage.inputDataToRegistrationField("telephone", "12345667");
+        registrationPage.inputDataToRegistrationField("password", "123123");
+        registrationPage.inputDataToRegistrationField("confirm", "123123");
+        registrationPage.clickNewsletterYesRadioButton();
+        registrationPage.clickPrivacyPolicyCheckbox();
+        registrationPage.clickContinueButton();
+        String getEmailIsAlreadyExistActualMessage = registrationPage.getMessageOfExistingEmail();
+        Assertions.assertThat(getEmailIsAlreadyExistActualMessage).as("error message is different")
+                .isEqualTo(getEmailIsAlreadyExistActualMessage);
+    }
+
+    @Test
+    void failedRegistrationWhenPasswordFieldIsEmpty(){
+        headerPage = new HeaderComponent();
+        registrationPage = new RegistrationPage();
+        headerPage.clickAccountDropdown();
+        headerPage.clickRegisterFromDropdown();
+        registrationPage.inputDataToRegistrationField("firstname", "Test");
+        registrationPage.inputDataToRegistrationField("lastname", "Test");
+        registrationPage.inputDataToRegistrationField("telephone", "12345667");
+        registrationPage.inputDataToRegistrationField("email", "sajowi9588@epeva.com");
+        registrationPage.clickNewsletterYesRadioButton();
+        registrationPage.clickPrivacyPolicyCheckbox();
+        registrationPage.clickContinueButton();
+        String getIncorrectPasswordActualMessage = registrationPage.getMessageOfIncorrectPassword();
+        Assertions.assertThat(getIncorrectPasswordActualMessage).as("error message is different")
+                .isEqualTo(getIncorrectPasswordActualMessage);
+    }
+
+    @Test
+    void failedRegistrationWhenFirstNameIsEmpty (){
+        headerPage = new HeaderComponent();
+        registrationPage = new RegistrationPage();
+        headerPage.clickAccountDropdown();
+        headerPage.clickRegisterFromDropdown();
+        registrationPage.inputDataToRegistrationField("lastname", "Test");
+        registrationPage.inputDataToRegistrationField("email", "sajowi9588@epeva.com");
+        registrationPage.inputDataToRegistrationField("telephone", "12345667");
+        registrationPage.inputDataToRegistrationField("password", "123123");
+        registrationPage.inputDataToRegistrationField("confirm", "123123");
+        registrationPage.clickNewsletterYesRadioButton();
+        registrationPage.clickPrivacyPolicyCheckbox();
+        registrationPage.clickContinueButton();
+        String getMessageOfEmptyFirstnameActualMessage = registrationPage.getMessageOfEmptyFirstname();
+        Assertions.assertThat(getMessageOfEmptyFirstnameActualMessage).as("error message is different")
+                .isEqualTo(getMessageOfEmptyFirstnameActualMessage);
     }
 }

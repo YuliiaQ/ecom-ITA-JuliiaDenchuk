@@ -4,10 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-    public LoginPage(WebDriver driver){
-        this.driver=driver;
-    }
-
     private static final String MY_ACCOUNT_BUTTON = "//span[contains(text(), 'Account')]";
     private static final String LOGIN_DROPDOWN_BUTTON = "//li[contains(@class, 'dropdown')]//following::a[text()='Login']";
     private static final String EMAIL_INPUT_FIELD = "input-email";
@@ -70,4 +66,5 @@ public class LoginPage extends BasePage {
     public void clickForgottenPasswordButton(){
         findElementBy(By.xpath(FORGOTTEN_PASSWORD_BUTTON)).click();
     }
+
 }

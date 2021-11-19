@@ -1,33 +1,33 @@
 package driver;
 
-import org.junit.Before;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.concurrent.TimeUnit;
+
+@Getter
 public class DriverInit {
-    public static WebDriver driver;
+    @Getter
+    private WebDriver driver;
 
-
-    public static void setDriver (WebDriver webDriver){
-        driver = webDriver;
-    }
-
-    @Before
-    public static WebDriver getDriver(){
-        if (driver == null){
-            try{
-                setDriver(new ChromeDriver());
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+    public WebDriver setDriver(){
+        if(driver == null){
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.manage().window().maximize();
+            driver.get("https://demo.opencart.com");
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         }
         return driver;
     }
 
-    public static void closeDriver(){
+    public void closeDriver(){
         if (driver != null){
-            getDriver().quit();
-            driver = null;
+            driver.quit();
         }
     }
+
 }

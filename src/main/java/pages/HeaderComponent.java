@@ -3,21 +3,16 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HeaderPage extends BasePage{
+public class HeaderComponent extends AbstractBasePage{
 
-    private final WebDriver driver;
 
-    public HeaderPage(WebDriver driver){
-        this.driver=driver;
-    }
-
+    private static final String MY_ACCOUNT_BUTTON = "//span[contains(text(), 'Account')]";
     private static final String CURRENCY_BUTTON = "//div[@class='btn-group open']";
     private static final String EURO_DROPDOWN = "//button[@name='EUR']";
     private static final String POUND_DROPDOWN = "//button[@name='GBP']";
     private static final String DOLLAR_DROPDOWN = "/button[@name='USD']";
     private static final String TELEPHONE = "//i[@class='fa fa-phone']";
     private static final String CONTACT_PAGE = "//div[@id='content']//following::h1[text()='Contact Us']";
-    private static final String MY_ACCOUNT_BUTTON = "//span[contains(text(), 'Account')]";
     private static final String LOGIN_DROPDOWN_BUTTON = "//li[contains(@class, 'dropdown')]//following::a[text()='Login']";
     private static final String REGISTER_DROPDOWN_BUTTON = "//li[contains(@class, 'dropdown')]//following::a[text()='Register']";
     private static final String REGISTER_PAGE = "//div[@id='content']//following::h1[text()='Register Account']";

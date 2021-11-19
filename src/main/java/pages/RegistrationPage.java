@@ -1,78 +1,34 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+@Getter
 
 public class RegistrationPage extends BasePage {
 
-    private final WebDriver driver;
 
-    public RegistrationPage(WebDriver driver){
-        this.driver=driver;
-    }
-
-    private static final String LOGIN_PAGE_LINK = "//div[@id='content']//following::a[text()='login page']";
-    private static final String REGISTRATION_FIRST_NAME_FIELD = "//input[@id='input-firstname']";
-    private static final String REGISTRATION_LAST_NAME_FIELD = "//input[@id='input-lastname']";
-    private static final String REGISTRATION_EMAIL_FIELD = "//input[@id='input-email']";
-    private static final String REGISTRATION_TELEPHONE_FIELD = "//input[@id='input-telephone']";
-    private static final String REGISTRATION_PASSWORD_FIELD = "//input[@id='input-password']";
-    private static final String REGISTRATION_PASSWORD_CONFIRM_FIELD = "//input[@id='input-confirm']";
-    private static final String REGISTRATION_SUBSCRIPTION_FIELD = "//input[@type='radio']";//specify
-    private static final String REGISTRATION_SUBSCRIPTION_DISAGREEMENT = "//input[@type='radio']";
-    private static final String PRIVACY_POLICY_LINK = "//a[@class='agree']";
-    private static final String PRIVACY_POLICY_CHECKBOX = "//input[@type='checkbox']";
+    private static final String REGISTRATION_FIELD = "//input[@name='%s']";
+    private static final String NEWSLETTER_YES_RADIOBUTTON = "//label[@class='radio-inline']/child::input[@value='1']";
+    private static final String NEWSLETTER_NO_RADIOBUTTON = "//label[@class='radio-inline']/child::input[@value='0']";
+    private static final String PRIVACY_POLICY_CHECKBOX = "//input[@name='agree']";
     private static final String CONTINUE_BUTTON = "//input[@class='btn btn-primary']";
+    private static final String INVALID_EMAIL_WARNING = "//div[@class='alert alert-danger alert-dismissible']";
+    private static final String EMAIL_DOES_NOT_APPEAR_WARNING = "//div[@class='text-danger']";
+    private static final String ALREADY_REGISTERED_EMAIL = "//div[@class='alert alert-danger alert-dismissible']";
+    private static final String INCORRECT_PASSWORD = "//div[@class='text-danger']";
+    private static final String FIRSTNAME_IS_EMPTY = "//div[@class='text-danger']";
 
-    public void inputFirstNameToField(String firstName) {
-
-        findElementBy(By.id(REGISTRATION_FIRST_NAME_FIELD)).sendKeys(firstName);
+    public void inputDataToRegistrationField(String field, String data) {
+        findElementBy(By.xpath(String.format(REGISTRATION_FIELD, field))).sendKeys(data);
     }
 
-    public void inputLastNameToField(String lastName) {
-
-        findElementBy(By.id(REGISTRATION_LAST_NAME_FIELD)).sendKeys(lastName);
+    public void clickNewsletterYesRadioButton(){
+        findElementBy(By.xpath(NEWSLETTER_YES_RADIOBUTTON)).click();
     }
 
-    public void inputEmailToEmailField(String email) {
-
-        findElementBy(By.id(REGISTRATION_EMAIL_FIELD)).sendKeys(email);
-    }
-
-    public void clickRegistrationFirstNameInput(){
-        findElementBy(By.xpath(REGISTRATION_FIRST_NAME_FIELD)).click();
-    }
-
-    public void clickRegistrationLastNameInput(){
-        findElementBy(By.xpath(REGISTRATION_LAST_NAME_FIELD)).click();
-    }
-
-    public void clickRegistrationEmailInput(){
-        findElementBy(By.xpath(REGISTRATION_EMAIL_FIELD)).click();
-    }
-
-    public void clickRegistrationTelephone(){
-        findElementBy(By.xpath(REGISTRATION_TELEPHONE_FIELD)).click();
-    }
-
-    public void clickRegistrationPasswordInput(){
-        findElementBy(By.xpath(REGISTRATION_PASSWORD_FIELD)).click();
-    }
-
-    public void clickRegistrationPasswordConfirm(){
-        findElementBy(By.xpath(REGISTRATION_PASSWORD_CONFIRM_FIELD)).click();
-    }
-
-    public void clickRegistrationSubscriptionAgreement(){
-        findElementBy(By.xpath(REGISTRATION_SUBSCRIPTION_FIELD)).click();
-    }
-
-    public void clickRegistrationSubscriptionDisagreement(){
-        findElementBy(By.xpath(REGISTRATION_SUBSCRIPTION_DISAGREEMENT)).click();
-    }
-
-    public void clickPrivacyPolicy(){
-        findElementBy(By.xpath(PRIVACY_POLICY_LINK)).click();
+    public void clickNewsletterNoRadioButton(){
+        findElementBy(By.xpath(NEWSLETTER_NO_RADIOBUTTON)).click();
     }
 
     public void clickPrivacyPolicyCheckbox(){
@@ -82,4 +38,20 @@ public class RegistrationPage extends BasePage {
     public void clickContinueButton(){
         findElementBy(By.xpath(CONTINUE_BUTTON)).click();
     }
+
+    public String getWarningInvalidEmailMessage(){
+        return findElementBy(By.xpath(EMAIL_DOES_NOT_APPEAR_WARNING)).getText();
+    }
+
+    public String getMessageOfExistingEmail (){
+        return findElementBy(By.xpath(ALREADY_REGISTERED_EMAIL)).getText();
+    }
+    public String getMessageOfIncorrectPassword (){
+        return findElementBy(By.xpath(INCORRECT_PASSWORD)).getText();
+    }
+
+    public String getMessageOfEmptyFirstname (){
+        return findElementBy(By.xpath(FIRSTNAME_IS_EMPTY)).getText();
+    }
+
 }
