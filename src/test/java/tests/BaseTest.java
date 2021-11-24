@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 @Getter
 public class BaseTest {
-@Getter
+    @Getter
     private WebDriver driver;
     DriverInit driverInit = new DriverInit();
 

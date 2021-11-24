@@ -23,22 +23,22 @@ public class BasePage extends AbstractBasePage {
     @Accessors(fluent = true)
     protected HeaderComponent headerComponent = new HeaderComponent();
 
-    @BeforeEach
-    public void setDriver() {
-        if (driver == null) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            driver.get("https://demo.opencart.com");
-            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        }
-    }
-
-    @AfterEach
-    public void closeDriver() {
-        if (driver != null)
-            driver.quit();
-    }
+//    @BeforeEach
+//    public void setDriver() {
+//        if (driver == null) {
+//            WebDriverManager.chromedriver().setup();
+//            driver = new ChromeDriver();
+//            driver.manage().window().maximize();
+//            driver.get("https://demo.opencart.com");
+//            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+//        }
+//    }
+//
+//    @AfterEach
+//    public void closeDriver() {
+//        if (driver != null)
+//            driver.quit();
+//    }
 
 }
 
