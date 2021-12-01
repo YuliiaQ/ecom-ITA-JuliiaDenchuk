@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public abstract class AbstractBasePage {
     @Getter
     public static WebDriver driver;
@@ -19,7 +21,17 @@ public abstract class AbstractBasePage {
         return new WebDriverWait(driver, 200).until(ExpectedConditions.visibilityOf(locator));
     }
 
+    public List<WebElement> waitForVisibilityOfElements(List<WebElement> locators) {
+        return new WebDriverWait(driver, 200).until(ExpectedConditions.visibilityOfAllElements(locators));
+    }
+
+
     public WebElement findElementBy(By by) {
         return waitForVisibilityOfElement(driver.findElement(by));
     }
+
+    public Boolean isElementPresent(By by) {
+        return !waitForVisibilityOfElements(driver.findElements(by)).isEmpty();
+    }
+
 }

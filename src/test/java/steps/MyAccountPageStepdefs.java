@@ -1,5 +1,7 @@
 package steps;
 
+import enums.elements.YourStoreNavbarButton;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.assertj.core.api.Assertions;
 import pages.MyAccountPage;
@@ -10,4 +12,10 @@ public class MyAccountPageStepdefs {
     public void myAccountPageIsDisplayed() {
         Assertions.assertThat(myAccountPage.isMyAccountHeaderVisible()).isEqualTo(true);
     }
+
+    @And("I click {} on Your Store Navbar on My Account Page")
+    public void iClickYOUR_STORE_LINKOnYourStoreNavbarOnMyAccountPage(YourStoreNavbarButton button) {
+        myAccountPage.yourStoreNavbarComponent().clickTopNavbarButton(button);
+    }
+
 }

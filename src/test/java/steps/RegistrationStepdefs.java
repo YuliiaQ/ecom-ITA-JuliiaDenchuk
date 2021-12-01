@@ -1,5 +1,9 @@
 package steps;
 
+import enums.TableFields;
+import enums.elements.HeaderDropdownButton;
+import enums.elements.MyAccountDropdownButton;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,13 +11,15 @@ import io.cucumber.java.en.When;
 import org.assertj.core.api.Assertions;
 import pages.RegistrationPage;
 
+import java.util.Map;
+
 public class RegistrationStepdefs {
 
     private static final RegistrationPage registrationPage = new RegistrationPage();
     @Given("Registration page is opened in header dropdown")
     public void registrationPageIsOpenedInHeaderDropdown() {
-        registrationPage.headerComponent().clickHeaderDropdownButton("My Account");
-        registrationPage.headerComponent().clickLoginOrRegistrationFromDropdown("Register");
+        registrationPage.headerComponent().clickHeaderDropdownButton(HeaderDropdownButton.MY_ACCOUNT_HEADER_DROPDOWN_BUTTON);
+        registrationPage.headerComponent().clickLoginOrRegistrationFromDropdown(MyAccountDropdownButton.REGISTER_DROPDOWN_BUTTON);
     }
 
     @When("I enter in the field {string} data {string} on Registration page")
@@ -56,5 +62,18 @@ public class RegistrationStepdefs {
         String alertActualMessage = registrationPage.getAlertDismissibleWarning();
         Assertions.assertThat(message).as(String.format("Expected: %s, Actual: %s", message, alertActualMessage))
                 .isEqualTo(alertActualMessage);
+    }
+    @When("I enter in the field enum {} data {string} on Registration page")
+    public void iEnterInTheFieldEnumDataOnRegistrationPage(String field, String data) {
+        registrationPage.inputDataToRegistrationField(field, data);
+    }
+
+    @When("I enter in the field data on Registration page")
+    public void iEnterInTheFieldDataOnRegistrationPage(DataTable table) {
+        for (Map<String, String> row : table.asMaps()){
+            String field = row.get(TableFields.FIELD_NAME.toString());
+            String data = row.get(TableFields.INPUT_DATA.toString());
+            registrationPage.inputDataToRegistrationField(field, data);
+        }
     }
 }
