@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 public class YourStorePage extends BasePage{
 
     private static final String YOUR_STORE_PAGE_TITLE = "//h3[text()='Featured']";
-    private static final String PRODUCT_TITLE_LINK = "//a[text()='%s']";
+    private static final String PRODUCT_TITLE_LINK = "//h4/child::a[text()='%s']";
     private static final String PRODUCT_CARD_TITLE = "//h1[text()='%s']";
     private static final String SHOPPING_CART_BUTTON = "//span[@id='cart-total']";
     private static final String ADD_PRODUCT_TO_SOMETHING_BUTTON = "//h3[text()='Featured']//following::button[%d]";

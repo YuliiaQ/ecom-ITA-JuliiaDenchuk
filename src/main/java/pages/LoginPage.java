@@ -71,8 +71,8 @@ public class LoginPage extends BasePage {
         findElementBy(By.xpath(String.format(LOGIN_PAGE_INPUT_FIELD, field.toString()))).sendKeys(data);
     }
 
-
     public void inputDataToInputFieldWithTable(String field, String data) {
         findElementBy(By.xpath(String.format(LOGIN_PAGE_INPUT_FIELD, field))).sendKeys(data);
     }
+
 }

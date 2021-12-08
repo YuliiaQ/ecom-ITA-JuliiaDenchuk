@@ -2,6 +2,9 @@ Feature: As an unregistered user
   I want to log in to the system with my credentials
   So that I can have access to store
 
+  Scenario: Property File check
+    Given User is logged in on Login Page
+
   Scenario:[PARAMS] My Account page is displayed after successful login
     Given Login page is opened in header dropdown
     When I enter in the field 'email' data 'sajowi9588@epeva.com' on Login page

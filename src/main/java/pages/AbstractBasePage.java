@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public abstract class AbstractBasePage {
     @Getter
@@ -18,11 +19,11 @@ public abstract class AbstractBasePage {
     }
 
     public WebElement waitForVisibilityOfElement(WebElement locator) {
-        return new WebDriverWait(driver, 200).until(ExpectedConditions.visibilityOf(locator));
+        return new WebDriverWait(driver, 500).until(ExpectedConditions.visibilityOf(locator));
     }
 
     public List<WebElement> waitForVisibilityOfElements(List<WebElement> locators) {
-        return new WebDriverWait(driver, 200).until(ExpectedConditions.visibilityOfAllElements(locators));
+        return new WebDriverWait(driver, 500).until(ExpectedConditions.visibilityOfAllElements(locators));
     }
 
 
@@ -34,4 +35,16 @@ public abstract class AbstractBasePage {
         return !waitForVisibilityOfElements(driver.findElements(by)).isEmpty();
     }
 
+    public void implicitlyWait(){
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
+
+    public void waitTillScriptIsLoaded(){
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+    }
+
+    public void explicitlyWait(String xpath){
+        WebDriverWait wait = new WebDriverWait(driver, 40);
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpath)));
+    }
 }

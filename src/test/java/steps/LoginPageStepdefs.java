@@ -8,13 +8,13 @@ import enums.elements.MyAccountDropdownButton;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.Assertions;
+import lombok.extern.log4j.Log4j;
 import pages.LoginPage;
+import properties.PropertyLoader;
 
 import java.util.Map;
-
+@Log4j
 public class LoginPageStepdefs {
     private static final LoginPage loginPage = new LoginPage();
 
@@ -23,6 +23,17 @@ public class LoginPageStepdefs {
         loginPage.headerComponent().clickHeaderDropdownButton(HeaderDropdownButton.MY_ACCOUNT_HEADER_DROPDOWN_BUTTON);
         loginPage.headerComponent().clickLoginOrRegistrationFromDropdown(MyAccountDropdownButton.LOGIN_DROPDOWN_BUTTON);
     }
+
+
+
+//    String email = PropertyLoader.getProperty("USER_EMAIL");
+//    String password = PropertyLoader.getProperty("USER_PASSWORD");
+//    log.info(String.format("Entering email %s", email));
+//        loginPage.inputDataToInputField(LoginPageInputField.EMAIL_INPUT_FIELD.toString(), email);
+//        log.info(String.format("Entering password %s", password));
+//        loginPage.inputDataToInputField(LoginPageInputField.PASSWORD_INPUT_FIELD.toString(), password);
+//        log.info("Click submit button");
+//        loginPage.clickSubmitButton();
 
     @When("I enter in the field {string} data {string} on Login page")
     public void iEnterInTheFieldDataOnLoginPage(String field, String data) {
@@ -51,6 +62,23 @@ public class LoginPageStepdefs {
     @And("I click {string} button on Login page")
     public void iClickLoginButtonOnLoginPage(String button) {
         loginPage.clickSubmitButton(button);
+    }
+
+
+    @Given("User is logged in on Login Page")
+    public void userIsLoggedInOnLoginPage() {
+        loginPage.headerComponent().clickHeaderDropdownButton(HeaderDropdownButton.MY_ACCOUNT_HEADER_DROPDOWN_BUTTON);
+        log.info("Account dropdown is opening");
+        loginPage.headerComponent().clickLoginOrRegistrationFromDropdown(MyAccountDropdownButton.LOGIN_DROPDOWN_BUTTON);
+        log.info("Login page is opening");
+        String email = PropertyLoader.getProperty("USER_EMAIL");
+        String password = PropertyLoader.getProperty("USER_PASSWORD");
+        log.info(String.format("Entering email %s", email));
+        loginPage.inputDataToInputField(LoginPageInputField.EMAIL_INPUT_FIELD.toString(), email);
+        log.info(String.format("Entering password %s", password));
+        loginPage.inputDataToInputField(LoginPageInputField.PASSWORD_INPUT_FIELD.toString(), password);
+        log.info("Click submit button");
+        loginPage.clickSubmitButtonForEnum(LoginPageSubmitButton.SUBMIT_LOGIN_BUTTON);
     }
 
 
