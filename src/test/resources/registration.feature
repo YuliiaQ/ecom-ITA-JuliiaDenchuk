@@ -6,7 +6,7 @@ Feature: As an unregistered user
     Given Registration page is opened in header dropdown
     When I enter in the field 'firstname' data 'First' on Registration page
     And I enter in the field 'lastname' data 'First' on Registration page
-    And I enter in the field 'email' data 'iaaa.huk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'iaaa.hukvjhvj@gmail.com' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
@@ -17,42 +17,42 @@ Feature: As an unregistered user
     And I click button Continue after Registration
     Then My Account page is displayed
 
-  Scenario: [ENUM] Successful registration message is displayed after successful registration
-    Given Registration page is opened in header dropdown
-    When I enter in the field enum FIRSTNAME_REGISTRATION_FIELD data 'First' on Registration page
-    And I enter in the field enum LASTNAME_REGISTRATION_FIELD data 'Last' on Registration page
-    And I enter in the field enum EMAIL_REGISTRATION_FIELD data 'lam.dm@gmail.com' on Registration page
-    And I enter in the field enum TELEPHONE_REGISTRATION_FIELD data '067-123-45-67' on Registration page
-    And I enter in the field enum PASSWORD_REGISTRATION_FIELD data 'First' on Registration page
-    And I enter in the field enum CONFIRM_PASSWORD_REGISTRATION_FIELD data 'First' on Registration page
-    And I click radiobutton Yes in the field Subscribe
-    And I click Agree with Privacy Policy
-    And I click button Continue
-    And I click button Continue after Registration
-    Then My Account page is displayed
-
-  Scenario: [Data table] Successful registration message is displayed after successful registration
-    Given Registration page is opened in header dropdown
-    When I enter in the field data on Registration page
-      | fieldName | inputData       |
-      | firstname | First           |
-      | lastname  | Last            |
-      | email     | law.dm@gmail.com |
-      | telephone | 067-12-45-673   |
-      | password  | 123456          |
-      | confirm   | 123456          |
-    And I click radiobutton Yes in the field Subscribe
-    And I click Agree with Privacy Policy
-    And I click button Continue
-    And I click button Continue after Registration
-    Then My Account page is displayed
+#  Scenario: [ENUM] Successful registration message is displayed after successful registration
+#    Given Registration page is opened in header dropdown
+#    When I enter in the field enum FIRSTNAME_REGISTRATION_FIELD data 'First' on Registration page
+#    And I enter in the field enum LASTNAME_REGISTRATION_FIELD data 'Last' on Registration page
+#    And I enter in the field enum EMAIL_REGISTRATION_FIELD data 'lam.dvjhvjkm@gmail.com' on Registration page
+#    And I enter in the field enum TELEPHONE_REGISTRATION_FIELD data '067-123-45-67' on Registration page
+#    And I enter in the field enum PASSWORD_REGISTRATION_FIELD data 'First' on Registration page
+#    And I enter in the field enum CONFIRM_PASSWORD_REGISTRATION_FIELD data 'First' on Registration page
+#    And I click radiobutton Yes in the field Subscribe
+#    And I click Agree with Privacy Policy
+#    And I click button Continue
+#    And I click button Continue after Registration
+#    Then My Account page is displayed
+#
+#  Scenario: [Data table] Successful registration message is displayed after successful registration
+#    Given Registration page is opened in header dropdown
+#    When I enter in the field data on Registration page
+#      | fieldName | inputData       |
+#      | firstname | First           |
+#      | lastname  | Last            |
+#      | email     | lavjbvhkbw.dm@gmail.com |
+#      | telephone | 067-12-45-673   |
+#      | password  | 123456          |
+#      | confirm   | 123456          |
+#    And I click radiobutton Yes in the field Subscribe
+#    And I click Agree with Privacy Policy
+#    And I click button Continue
+#    And I click button Continue after Registration
+#    Then My Account page is displayed
 
 
     Scenario: Failed registration message is displayed after failed registration with existing email
       Given Registration page is opened in header dropdown
       When I enter in the field 'firstname' data 'First' on Registration page
       And I enter in the field 'lastname' data 'First' on Registration page
-      And I enter in the field 'email' data 'julia.denchuk@gmail.com' on Registration page
+      And I enter in the field 'email' data 'julia.debgkhnchuk@gmail.com' on Registration page
       And I enter in the field 'telephone' data '0981234545' on Registration page
       And I enter in the field 'password' data '123123' on Registration page
     #confirm password
@@ -79,7 +79,7 @@ Feature: As an unregistered user
     Given Registration page is opened in header dropdown
     When I enter in the field 'firstname' data 'First' on Registration page
     And I enter in the field 'lastname' data 'First' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.denkbkbchk@gmail.com' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
     And I click radiobutton Yes in the field Subscribe
     And I click Agree with Privacy Policy
@@ -89,7 +89,7 @@ Feature: As an unregistered user
   Scenario: Failed registration message is displayed after failed registration with empty firstname field
     Given Registration page is opened in header dropdown
     And I enter in the field 'lastname' data 'First' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.denchbkbjbkk@gmail.com' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
@@ -102,7 +102,7 @@ Feature: As an unregistered user
   Scenario: Failed registration message is displayed after failed registration with empty lastname field
     Given Registration page is opened in header dropdown
     And I enter in the field 'firstname' data 'First' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.denvjmbchk@gmail.com' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
@@ -116,7 +116,7 @@ Feature: As an unregistered user
     Given Registration page is opened in header dropdown
     And I enter in the field 'firstname' data 'First' on Registration page
     And I enter in the field 'lastname' data 'First' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.denjvhjbchk@gmail.com' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
     And I enter in the field 'confirm' data '123123' on Registration page
@@ -130,7 +130,7 @@ Feature: As an unregistered user
     And I enter in the field 'firstname' data 'First' on Registration page
     And I enter in the field 'lastname' data 'First' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.denhvbkbchk@gmail.com' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
     And I enter in the field 'confirm' data '1231' on Registration page
@@ -144,7 +144,7 @@ Feature: As an unregistered user
     And I enter in the field 'firstname' data 'First' on Registration page
     And I enter in the field 'lastname' data 'First' on Registration page
     And I enter in the field 'telephone' data '0981234545' on Registration page
-    And I enter in the field 'email' data 'julia.denchk@gmail.com' on Registration page
+    And I enter in the field 'email' data 'julia.dencbjhbbjhk@gmail.com' on Registration page
     And I enter in the field 'password' data '123123' on Registration page
     #confirm password
     And I enter in the field 'confirm' data '123123' on Registration page
